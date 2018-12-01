@@ -3,6 +3,11 @@
 # This is a simple, short text adventure game that the user navigates using menu options.
 
 
+import random
+import combat
+random.seed()
+
+
 # Startup function is the first function to run when the game starts. (Landon)
 def startup():
     print('Prison Escape')
@@ -69,7 +74,7 @@ def intro(mode):
 # storyline is the main story sequence of the game.
 def storyline(name, stats):
     print(name, ', you are a human. You have been captured by an elven/dwarven faction and sent to prison, ', sep='', end='')
-    print('sentenced to death by combat!')
+    print('sentenced to death by combat.')
     print('The guards bring you to an arena, forced to fight another human.')
     battle('human', stats)
     print('You have won your first battle. You will fight again tomorrow.')
