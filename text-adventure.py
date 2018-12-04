@@ -71,7 +71,7 @@ def intro(mode):
         storyline(player_name, player_stats)
 
 
-# storyline is the main story sequence of the game.
+# storyline is the main story sequence of the game. (Landon/Taylor)
 def storyline(name, stats):
     print(name, ', you are a human. You have been captured by an elven/dwarven faction and sent to prison, ', sep='', end='')
     print('sentenced to death by combat.')
@@ -87,6 +87,104 @@ def storyline(name, stats):
     print('You defeated the dwarf, but the battle is far from over...')
     print('You must now find/fight your way out of the prison.')
     # Goes to prison hallway sequence
-
+    print('From your cell there are two hallways you can choose from: Hallway 1 or Hallway 2. One of these has an enemy while the other provides safe passage to the next part of the prison.')
+    hallway = int(input("Enter '1' to choose Hallway 1 or enter '2' to choose Hallway 2."))
+    # First hallway choice is 1.
+    if hallway = 1:
+        print('You chose correctly. From here there are two hallways you can choose from: Hallway 3 or Hallway 4. One of these has an enemy while the other provides safe passage to the next part of the prison.')
+        hallway = int(input("Enter '3' to choose Hallway 3 or enter '4' to choose Hallway 4."))
+        if hallway = 3:
+            print('You chose correctly. You can see light near the end of both of the next hallways. From here there are two hallways you can choose from: Hallway 7 or Hallway 8. One of these has an enemy while the other allows you to escape the prison without facing an enemy.')
+            hallway = int(input("Enter '7' to choose Hallway 7 or enter '8' to choose Hallway 8."))
+            if hallway = 7:
+                print('Congratulations on escaping the prison! But you still have one enemy left: the final boss!')
+                combat.battle('boss', stats, health)
+            if hallway = 8:
+                rand = encounter()
+                if rand <= 50:
+                    print('You have encountered a dwarf.')
+                    combat.battle('dwarf', stats, health)
+                elif rand > 50:
+                    print('You have encountered an elf.')
+                    combat.battle('elf', stats, health)
+                print('Congratulations on escaping the prison! But you still have one enemy left: the final boss!')
+                combat.battle('boss', stats, health)
+        if hallway  = 4:
+            rand = encounter()
+            if rand <= 50:
+                print('You have encountered a dwarf.')
+                combat.battle('dwarf', stats, health)
+            elif rand > 50:
+                print('You have encountered an elf.')
+                combat.battle('elf', stats, health)
+            print('You can see light near the end of both of the next hallways. From here there are two hallways you can choose from: Hallway 9 or Hallway 10. One of these has an enemy while the other provides safe passage to the next part of the prison.')
+            hallway = int(input("Enter '9' to choose Hallway 9 or enter '10' to choose Hallway 10."))
+            if hallway = 9:
+                print('Congratulations on escaping the prison! But you still have one enemy left: the final boss!')
+                combat.battle('boss', stats, health)
+            if hallway = 10:
+                rand = encounter()
+                if rand <= 50:
+                    print('You have encountered a dwarf.')
+                    combat.battle('dwarf', stats, health)
+                elif rand > 50:
+                    print('You have encountered an elf.')
+                    combat.battle('elf', stats, health)
+                print('Congratulations on escaping the prison! But you still have one enemy left: the final boss!')
+                combat.battle('boss', stats, health)
+    # First hallway choice is 2.
+    if hallway = 2:
+        rand = encounter()
+        if rand <= 50:
+            print('You have encountered a dwarf.')
+            combat.battle('dwarf', stats, health)
+        elif rand > 50:
+            print('You have encountered an elf.')
+            combat.battle('elf', stats, health)
+        print('From here there are two hallways you can choose from: Hallway 5 or Hallway 6. One of these has an enemy while the other provides safe passage to the next part of the prison.')
+        hallway = int(input("Enter '5' to choose Hallway 5 or enter '6' to choose Hallway 6."))
+        if hallway = 5:
+            print('You chose correctly. You can see light near the end of both of the next hallways. From here there are two hallways you can choose from: Hallway 11 or Hallway 12. One of these has an enemy while the other allows you to escape the prison without facing an enemy.')
+            hallway = int(input("Enter '11' to choose Hallway 11 or enter '12' to choose Hallway 12."))
+            if hallway = 11:
+                print('Congratulations on escaping the prison! But you still have one enemy left: the final boss!')
+                combat.battle('boss', stats, health)
+            if hallway = 12:
+                rand = encounter()
+                if rand <= 50:
+                    print('You have encountered a dwarf.')
+                    combat.battle('dwarf', stats, health)
+                elif rand > 50:
+                    print('You have encountered an elf.')
+                    combat.battle('elf', stats, health)
+                print('Congratulations on escaping the prison! But you still have one enemy left: the final boss!')
+                combat.battle('boss', stats, health)
+        if hallway = 6:
+            rand = encounter()
+            if rand <= 50:
+                print('You have encountered a dwarf.')
+                combat.battle('dwarf', stats, health)
+            elif rand > 50:
+                print('You have encountered an elf.')
+                combat.battle('elf', stats, health)
+            print('You can see light near the end of both of the next hallways. From here there are two hallways you can choose from: Hallway 13 or Hallway 14. One of these has an enemy while the other provides safe passage to the next part of the prison.')
+            hallway = int(input("Enter '13' to choose Hallway 13 or enter '14' to choose Hallway 14."))
+            if hallway = 13:
+                print('Congratulations on escaping the prison! But you still have one enemy left: the final boss!')
+                combat.battle('boss', stats, health)
+            if hallway = 14:
+                rand = encounter()
+                if rand <= 50:
+                    print('You have encountered a dwarf.')
+                    combat.battle('dwarf', stats, health)
+                elif rand > 50:
+                    print('You have encountered an elf.')
+                    combat.battle('elf', stats, health)
+                print('Congratulations on escaping the prison! But you still have one enemy left: the final boss!')
+                combat.battle('boss', stats, health)
+# encounter generates a random number from 1 to 100 to determine which enemy (dwarf/elf) is encountered. (Taylor)
+def encounter():
+    rand = random.randint(1,100)
+    return rand
 
 startup()

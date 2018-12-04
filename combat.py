@@ -7,7 +7,7 @@
 import random
 
 
-# battle_tutorial handles the player's first battle.
+# battle_tutorial handles the player's first battle. (Landon/Taylor)
 def battle_tutorial(hero):
     # This is a tutorial.
     battling = True
@@ -30,29 +30,47 @@ def battle_tutorial(hero):
     print('Dodge + Heal: Random, based on speed, requires higher speed than dodge for higher success rate.'
           'If successful, hero receives no damage and heals half health. If unsuccessful, hero receives triple normal damage.')
     while battling:
+        turn = 0
         normal_offense = hero['attack'] / human['defense']
         normal_defense = human['attack'] / hero['defense']
         move = input('1: Sword Swing, 2: Shield Bash, 3: Heal, 4: Dodge, 5: Dodge + Heal ')
         if move == '1':
             human_health -= normal_offense
             hero_health -= normal_defense
+            turn += 1
         elif move == '2':
             received = normal_defense / 2
             hero_health -= received
             human_health -= received / 2
+            turn += 1
         elif move == '3':
             hero_health += 5
             hero_health -= normal_defense
+            turn += 1
         elif move == '4':
             # How does dodge system work with speed?
+            rand = random.randint(1, 10)
+            if hero['speed'] >= rand:
+                # ???
+            elif hero['speed'] < rand:
+                received = normal_defense * 2
+                hero_health -= received
+            turn += 1
         elif move == '5':
             # Same as above
+            rand = random.randint(1, 10)
+            if hero['speed'] >= rand:
+                hero_health += 5
+            elif hero['speed'] < rand:
+                received = normal_defense * 3
+                hero_health -= received
+            turn += 1
         if human_health <= 0:
             battling = False
             return hero_health
 
 
-# battle function handles battles with various enemies, accepting the type of enemy and the player's stat dictionary as parameters.
+# battle function handles battles with various enemies, accepting the type of enemy and the player's stat dictionary as parameters. (Landon/Taylor)
 def battle(enemy, hero, hero_health):
     if enemy == 'dwarf':
         battling = True
@@ -62,7 +80,42 @@ def battle(enemy, hero, hero_health):
         dwarf['speed'] = 2
         dwarf_health = 10
         while battling:
-            # battle sequence
+            turn = 0
+            normal_offense = hero['attack'] / dwarf['defense']
+            normal_defense = dwarf['attack'] / hero['defense']
+            move = input('1: Sword Swing, 2: Shield Bash, 3: Heal, 4: Dodge, 5: Dodge + Heal ')
+            if move == '1':
+                dwarf_health -= normal_offense
+                hero_health -= normal_defense
+                turn += 1
+            elif move == '2':
+                received = normal_defense / 2
+                hero_health -= received
+                dwarf_health -= received / 2
+                turn += 1
+            elif move == '3':
+                hero_health += 5
+                hero_health -= normal_defense
+                turn += 1
+            elif move == '4':
+                rand = random.randint(1, 10)
+                if hero['speed'] >= rand:
+                    # ???
+                elif hero['speed'] < rand:
+                    received = normal_defense * 2
+                    hero_health -= received
+                turn += 1
+            elif move == '5':
+                rand = random.randint(1, 10)
+                if hero['speed'] >= rand:
+                    hero_health += 5
+                elif hero['speed'] < rand:
+                    received = normal_defense * 3
+                    hero_health -= received
+                turn += 1
+            if human_health <= 0:
+                battling = False
+                return hero_health
 
     elif enemy == 'elf':
         battling = True
@@ -72,7 +125,42 @@ def battle(enemy, hero, hero_health):
         elf['speed'] = 5
         elf_health = 10
         while battling:
-            # battle sequence
+            turn = 0
+            normal_offense = hero['attack'] / elf['defense']
+            normal_defense = elf['attack'] / hero['defense']
+            move = input('1: Sword Swing, 2: Shield Bash, 3: Heal, 4: Dodge, 5: Dodge + Heal ')
+            if move == '1':
+                elf_health -= normal_offense
+                hero_health -= normal_defense
+                turn += 1
+            elif move == '2':
+                received = normal_defense / 2
+                hero_health -= received
+                elf_health -= received / 2
+                turn += 1
+            elif move == '3':
+                hero_health += 5
+                hero_health -= normal_defense
+                turn += 1
+            elif move == '4':
+                rand = random.randint(1, 10)
+                if hero['speed'] >= rand:
+                    # ???
+                elif hero['speed'] < rand:
+                    received = normal_defense * 2
+                    hero_health -= received
+                turn += 1
+            elif move == '5':
+                rand = random.randint(1, 10)
+                if hero['speed'] >= rand:
+                    hero_health += 5
+                elif hero['speed'] < rand:
+                    received = normal_defense * 3
+                    hero_health -= received
+                turn += 1
+            if human_health <= 0:
+                battling = False
+                return hero_health
 
     elif enemy == 'boss':
         battling = True
@@ -82,4 +170,39 @@ def battle(enemy, hero, hero_health):
         boss['speed'] = 5
         boss_health = 10
         while battling:
-            # battle sequence
+            turn = 0
+            normal_offense = hero['attack'] / boss['defense']
+            normal_defense = boss['attack'] / hero['defense']
+            move = input('1: Sword Swing, 2: Shield Bash, 3: Heal, 4: Dodge, 5: Dodge + Heal ')
+            if move == '1':
+                boss_health -= normal_offense
+                hero_health -= normal_defense
+                turn += 1
+            elif move == '2':
+                received = normal_defense / 2
+                hero_health -= received
+                boss_health -= received / 2
+                turn += 1
+            elif move == '3':
+                hero_health += 5
+                hero_health -= normal_defense
+                turn += 1
+            elif move == '4':
+                rand = random.randint(1, 10)
+                if hero['speed'] >= rand:
+                    # ???
+                elif hero['speed'] < rand:
+                    received = normal_defense * 2
+                    hero_health -= received
+                turn += 1
+            elif move == '5':
+                rand = random.randint(1, 10)
+                if hero['speed'] >= rand:
+                    hero_health += 5
+                elif hero['speed'] < rand:
+                    received = normal_defense * 3
+                    hero_health -= received
+                turn += 1
+            if human_health <= 0:
+                battling = False
+                return hero_health
