@@ -71,7 +71,7 @@ def intro(mode):
                             player_stats['defense'] = int(input('Invalid value. Please enter your desired defense: '))
                         total_points += player_stats['defense']
                     # Check if total points are less than the max value
-                    if total_points < MAX_POINTS:
+                    if total_points <= MAX_POINTS:
                         # Get player speed
                         player_stats['speed'] = int(input('Enter your desired speed: '))
                         # Check if player's speed is greater than the max for a stat
