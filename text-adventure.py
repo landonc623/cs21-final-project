@@ -86,6 +86,9 @@ def intro(mode):
                     elif total_points > MAX_POINTS:
                         print('You went over the point limit of 15. Restarting...')
                         total_points = 0
+                    elif player_stats['attack'] or player_stats['defense'] or player_stats['speed'] == 0:
+                        print('No stat can equal zero. Restarting...')
+                        total_points = 0
                     # If the correct number of points has been assigned
                     else:
                         print()
