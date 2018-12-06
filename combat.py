@@ -25,11 +25,11 @@ def battle_tutorial(hero):
     human_health = 10
     print('Combat is turn based, and you always move first.')
     print('When you or the enemy uses a move, the other member of the battle will use a default attack unless there is '
-          'a dodge.')
+          'a successful dodge.')
     input('Your performance in various categories of battle will be dependent on the stats you assigned yourself. Press'
           ' enter to continue.')
     print()
-    print('You have 5 options each turn:')
+    print('You have 5 move options each turn (enemies also have their own moves):')
     print('Sword Swing: Hero deals normal damage, and receives full damage.')
     print('Shield Bash: Hero receives half normal damage, and deals back half received (quarter normal) damage to enemy'
           '.')
@@ -54,6 +54,8 @@ def battle_tutorial(hero):
     while battling:
         try:
             move = input('1: Sword Swing, 2: Shield Bash, 3: Heal, 4: Dodge, 5: Dodge + Heal ')
+            while move != '1' and move != '2' and move != '3' and move != '4' and move != '5':
+                move = input('Invalid selection. 1: Sword Swing, 2: Shield Bash, 3: Heal, 4: Dodge, 5: Dodge + Heal ')
         except ValueError:
             print('That is not a valid option. Please enter a number 1-5.')
         else:
@@ -147,6 +149,9 @@ def battle(enemy, hero, hero_health):
                 print('The dwarf\'s regen added 0.5 health, the dwarf\'s health is now', dwarf_health)
             try:
                 move = input('1: Sword Swing, 2: Shield Bash, 3: Heal, 4: Dodge, 5: Dodge + Heal ')
+                while move != '1' and move != '2' and move != '3' and move != '4' and move != '5':
+                    move = input(
+                        'Invalid selection. 1: Sword Swing, 2: Shield Bash, 3: Heal, 4: Dodge, 5: Dodge + Heal ')
             except ValueError:
                 print('That is not a valid option. Please enter a number 1-5.')
             else:
@@ -296,6 +301,9 @@ def battle(enemy, hero, hero_health):
         while battling:
             try:
                 move = input('1: Sword Swing, 2: Shield Bash, 3: Heal, 4: Dodge, 5: Dodge + Heal ')
+                while move != '1' and move != '2' and move != '3' and move != '4' and move != '5':
+                    move = input(
+                        'Invalid selection. 1: Sword Swing, 2: Shield Bash, 3: Heal, 4: Dodge, 5: Dodge + Heal ')
                 # Checks whether it's the first turn or not, if so, asks player to move again
                 if turn == 1 and move == 1:
                     print('Can\'t use Sword Swing on the first turn.')
@@ -460,6 +468,9 @@ def battle(enemy, hero, hero_health):
         while battling:
             try:
                 move = input('1: Sword Swing, 2: Shield Bash, 3: Heal, 4: Dodge, 5: Dodge + Heal ')
+                while move != '1' and move != '2' and move != '3' and move != '4' and move != '5':
+                    move = input(
+                        'Invalid selection. 1: Sword Swing, 2: Shield Bash, 3: Heal, 4: Dodge, 5: Dodge + Heal ')
                 # Checks whether it's the first turn or not, if so, asks player to move again
                 if turn == 1 and move == 1:
                     print('Can\'t use Sword Swing on the first turn.')
