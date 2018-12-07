@@ -1,9 +1,9 @@
-# Landon Cayia and Taylor French
+ Landon Cayia and Taylor French
 # CS 21 Final Project
 # combat.py contains all the files and functions required for combat in "text-adventure.py". Must be imported.
 
 
-# Random functions needed to determine whether a dodge is successful or not.
+# Random functions needed to determine whether a dodge is successful or not and which move is used.
 import random
 
 
@@ -23,6 +23,7 @@ def battle_tutorial(hero):
     # Health for player and enemy
     hero_health = 10
     human_health = 10
+    # Tutorial
     print('Combat is turn based, and you always move first.')
     print('When you or the enemy uses a move, the other member of the battle will use a default attack unless there is '
           'a successful dodge.')
@@ -41,6 +42,7 @@ def battle_tutorial(hero):
           'damage.')
     input('Press enter to continue.')
     print()
+    # Human info
     print('Enemy: Human')
     print('Attack: Very Low')
     print('Defense: Very Low')
@@ -60,24 +62,30 @@ def battle_tutorial(hero):
             print('That is not a valid option. Please enter a number 1-5.')
         else:
             # Player moves
+            # Sword Swing
             if move == '1':
                 print('You used Sword Swing, and the human used its normal attack on you.')
                 dealt = normal_offense
                 human_health -= dealt
                 received = normal_defense
                 hero_health -= received
+            # Shield Bash
             elif move == '2':
                 print('You used Shield Bash, and did a little damage to the human.')
                 received = normal_defense / 2
                 hero_health -= received
                 dealt = received / 2
                 human_health -= dealt
+            # Heal
             elif move == '3':
                 print('You used Heal, and recovered half your health. The human used its normal attack on you.')
                 heal_health = 5
                 hero_health += heal_health
+                if hero_health >= MAX_HEALTH:
+                        hero_health = MAX_HEALTH
                 received = normal_defense
                 hero_health -= received
+            # Dodge
             elif move == '4':
                 rand = random.randint(1, 10)
                 print('You attempted to Dodge.')
@@ -87,6 +95,7 @@ def battle_tutorial(hero):
                     received = normal_defense * 2
                     hero_health -= received
                     print('Dodge failed. The human\'s normal attack hit harder than usual.')
+            # Dodge and Heal
             elif move == '5':
                 print('You attempted to Dodge + Heal.')
                 rand = random.randint(1, 20)
@@ -95,12 +104,13 @@ def battle_tutorial(hero):
                     hero_health += heal_health
                     # If heal brings health above 10, reset to 10
                     if hero_health >= MAX_HEALTH:
-                        hero_health = 10
+                        hero_health = MAX_HEALTH
                     print('Dodge + Heal successful.')
                 elif hero['speed'] < rand:
                     received = normal_defense * 3
                     hero_health -= received
                     print('Dodge + Heal failed. The human\'s normal attack hit very hard.')
+            # Remaining health
             print('Your health is now', format(hero_health, '.2f'))
             print('The human\'s health is now', format(human_health, '.2f'))
             input('Press enter to continue.')
@@ -139,6 +149,7 @@ def battle(enemy, hero, hero_health):
         # Initialize turn counter
         turn = 1
         print()
+        # Dwarf Info
         print('Enemy: Dwarf')
         print('Attack: Very Low')
         print('Defense: High')
@@ -146,7 +157,7 @@ def battle(enemy, hero, hero_health):
         while battling:
             if regen:
                 dwarf_health += 0.5
-                print('The dwarf\'s regen added 0.5 health, the dwarf\'s health is now', dwarf_health)
+                print('The dwarf\'s regen added 0.5 health, the dwarf\'s health is now', format(dwarf_health, '.2f'), '.')
             try:
                 move = input('1: Sword Swing, 2: Shield Bash, 3: Heal, 4: Dodge, 5: Dodge + Heal ')
                 while move != '1' and move != '2' and move != '3' and move != '4' and move != '5':
@@ -156,24 +167,30 @@ def battle(enemy, hero, hero_health):
                 print('That is not a valid option. Please enter a number 1-5.')
             else:
                 # Player moves
+                # Sword Swing
                 if move == '1':
                     print('You used Sword Swing, and the dwarf used its normal attack on you.')
                     dealt = normal_offense
                     dwarf_health -= dealt
                     received = normal_defense
                     hero_health -= received
+                # Shield Bash
                 elif move == '2':
                     print('You used Shield Bash, and did a little damage to the dwarf.')
                     received = normal_defense / 2
                     hero_health -= received
                     dealt = received / 2
                     dwarf_health -= dealt
+                # Heal
                 elif move == '3':
                     print('You used Heal, and recovered half your health. The dwarf used its normal attack on you.')
                     heal_health = 5
                     hero_health += heal_health
+                    if hero_health >= MAX_HEALTH:
+                        hero_health = MAX_HEALTH
                     received = normal_defense
                     hero_health -= received
+                # Dodge
                 elif move == '4':
                     rand = random.randint(1, 10)
                     print('You attempted to Dodge.')
@@ -183,6 +200,7 @@ def battle(enemy, hero, hero_health):
                         received = normal_defense * 2
                         hero_health -= received
                         print('Dodge failed. The dwarf\'s normal attack hit harder than usual.')
+                # Dodge and Heal
                 elif move == '5':
                     print('You attempted to Dodge + Heal.')
                     rand = random.randint(1, 20)
@@ -191,12 +209,13 @@ def battle(enemy, hero, hero_health):
                         hero_health += heal_health
                         # If heal brings health above 10, reset to 10
                         if hero_health >= MAX_HEALTH:
-                            hero_health = 10
+                            hero_health = MAX_HEALTH
                         print('Dodge + Heal successful.')
                     elif hero['speed'] < rand:
                         received = normal_defense * 3
                         hero_health -= received
                         print('Dodge + Heal failed. The dwarf\'s normal attack hit very hard.')
+                # Displays remaining health
                 print('Your health is now', format(hero_health, '.2f'))
                 print('The dwarf\'s health is now', format(dwarf_health, '.2f'))
                 input('Press enter to continue.')
@@ -235,21 +254,25 @@ def battle(enemy, hero, hero_health):
                     else:
                         dwarf_move = '5'
                 # Dwarf moves
+                # Regens 0.5 health per turn
                 if dwarf_move == '1':
                     print('Dwarf used Regen. It will recover some health every turn.')
                     regen = True
                     dealt = normal_offense
                     dwarf_health -= dealt
+                # Power-Up, damage dealt by dwarf equals attack times number of times the Dwarf uses Power-up.
                 elif dwarf_move == '2':
                     print('Dwarf used Power-Up. The power of the dwarf\'s Axe Swing increased.')
                     dwarf_powerup += 1
                     dealt = normal_offense
                     dwarf_health -= dealt
+                # Spider-Dwarf doubles the dwarf's speed.
                 elif dwarf_move == '3':
                     print('Dwarf used Spider-Dwarf. Its speed increased.')
                     dwarf['speed'] *= 2
                     dealt = normal_offense
                     dwarf_health -= dealt
+                # Dodge
                 elif dwarf_move == '4':
                     print('Dwarf attempted to dodge.')
                     rand = random.randint(1, 10)
@@ -259,12 +282,14 @@ def battle(enemy, hero, hero_health):
                         dealt = normal_defense * 2
                         dwarf_health -= dealt
                         print('Dodge failed. Your normal attack hit harder than usual.')
+                # Axe Swing
                 elif dwarf_move == '5':
                     print('Dwarf used Axe Swing.')
                     received = normal_defense * dwarf_powerup
                     hero_health -= received
                     dealt = normal_offense
                     dwarf_health -= dealt
+                # Displays remaining health
                 print('Your health is now', format(hero_health, '.2f'))
                 print('The dwarf\'s health is now', format(dwarf_health, '.2f'))
                 input('Press enter to continue.')
@@ -294,6 +319,7 @@ def battle(enemy, hero, hero_health):
         # Initialize turn counter
         turn = 1
         print()
+        # Elf Info
         print('Enemy: Elf')
         print('Attack: Moderate')
         print('Defense: Very Low')
@@ -312,24 +338,30 @@ def battle(enemy, hero, hero_health):
                 print('That is not a valid option. Please enter a number 1-5.')
             else:
                 # Player moves
+                # Sword Swing
                 if move == '1':
                     print('You used Sword Swing, and the elf used its normal attack on you.')
                     dealt = normal_offense
                     elf_health -= dealt
                     received = normal_defense
                     hero_health -= received
+                # Shield Bash
                 elif move == '2':
                     print('You used Shield Bash, and did a little damage to the elf.')
                     received = normal_defense / 2
                     hero_health -= received
                     dealt = received / 2
                     elf_health -= dealt
+                # Heal
                 elif move == '3':
                     print('You used Heal, and recovered half your health. The elf used its normal attack on you.')
                     heal_health = 5
                     hero_health += heal_health
+                    if hero_health >= MAX_HEALTH:
+                        hero_health = MAX_HEALTH
                     received = normal_defense
                     hero_health -= received
+                # Dodge
                 elif move == '4':
                     rand = random.randint(1, 10)
                     print('You attempted to Dodge.')
@@ -339,6 +371,7 @@ def battle(enemy, hero, hero_health):
                         received = normal_defense * 2
                         hero_health -= received
                         print('Dodge failed. The elf\'s normal attack hit harder than usual.')
+                # Dodge and Heal
                 elif move == '5':
                     print('You attempted to Dodge + Heal.')
                     rand = random.randint(1, 20)
@@ -353,6 +386,7 @@ def battle(enemy, hero, hero_health):
                         received = normal_defense * 3
                         hero_health -= received
                         print('Dodge + Heal failed. The elf\'s normal attack hit very hard.')
+                # Displays remaining health
                 print('Your health is now', format(hero_health, '.2f'))
                 print('The elf\'s health is now', format(elf_health, '.2f'))
                 input('Press enter to continue.')
@@ -389,18 +423,21 @@ def battle(enemy, hero, hero_health):
                     else:
                         elf_move = '5'
                 # Elf moves
+                # Bow and Arrow
                 if elf_move == '1':
                     print('Elf used Bow and Arrow.')
                     received = normal_defense * 1.5
                     hero_health -= received
                     dealt = normal_offense
                     elf_health -= dealt
+                # Sword Swing
                 elif elf_move == '2':
                     print('Elf used Sword Swing.')
                     received = normal_defense
                     hero_health -= received
                     dealt = normal_offense
                     elf_health -= dealt
+                # Heal
                 elif elf_move == '3':
                     print('Elf used Heal.')
                     heal_health = 5
@@ -409,15 +446,17 @@ def battle(enemy, hero, hero_health):
                         elf_health = 10
                     dealt = normal_offense
                     elf_health -= dealt
+                # Parry
                 elif elf_move == '4':
                     print('Elf attempted to Parry.')
                     rand = random.randint(1, 10)
                     if elf['speed'] >= rand:
-                        print('Dodge successful.')
+                        print('Parry successful.')
                     elif elf['speed'] < rand:
                         dealt = normal_defense * 2
                         elf_health -= dealt
-                        print('Dodge failed. Your normal attack hit harder than usual.')
+                        print('Parry failed. Your normal attack hit harder than usual.')
+                # Parry and Heal
                 elif elf_move == '5':
                     print('Elf attempted to Parry + Heal.')
                     rand = random.randint(1, 20)
@@ -427,11 +466,12 @@ def battle(enemy, hero, hero_health):
                         # If heal brings health above 10, reset to 10
                         if elf_health >= MAX_HEALTH:
                             elf_health = 10
-                        print('Dodge + Heal successful.')
+                        print('Parry + Heal successful.')
                     elif elf['speed'] < rand:
                         dealt = normal_offense * 3
                         elf_health -= dealt
-                        print('Dodge + Heal failed. Your normal attack hit very hard.')
+                        print('Parry + Heal failed. Your normal attack hit very hard.')
+                # Displays remaining health
                 print('Your health is now', format(hero_health, '.2f'))
                 print('The elf\'s health is now', format(elf_health, '.2f'))
                 input('Press enter to continue.')
@@ -479,24 +519,30 @@ def battle(enemy, hero, hero_health):
                 print('That is not a valid option. Please enter a number 1-5.')
             else:
                 # Player moves
+                # Sword Swing
                 if move == '1':
                     print('You used Sword Swing, and the boss used its normal attack on you.')
                     dealt = normal_offense
                     boss_health -= dealt
                     received = normal_defense
                     hero_health -= received
+                # Shield Bash
                 elif move == '2':
                     print('You used Shield Bash, and did a little damage to the boss.')
                     received = normal_defense / 2
                     hero_health -= received
                     dealt = received / 2
                     boss_health -= dealt
+                # Heal
                 elif move == '3':
                     print('You used Heal, and recovered half your health. The boss used its normal attack on you.')
                     heal_health = 5
                     hero_health += heal_health
+                    if hero_health >= MAX_HEALTH:
+                        hero_health = 10
                     received = normal_defense
                     hero_health -= received
+                # Dodge
                 elif move == '4':
                     rand = random.randint(1, 10)
                     print('You attempted to Dodge.')
@@ -506,6 +552,7 @@ def battle(enemy, hero, hero_health):
                         received = normal_defense * 2
                         hero_health -= received
                         print('Dodge failed. The boss\'s normal attack hit harder than usual.')
+                # Dodge and Heal
                 elif move == '5':
                     print('You attempted to Dodge + Heal.')
                     rand = random.randint(1, 20)
@@ -520,6 +567,7 @@ def battle(enemy, hero, hero_health):
                         received = normal_defense * 3
                         hero_health -= received
                         print('Dodge + Heal failed. The boss\'s normal attack hit very hard.')
+                # Displays remaining health
                 print('Your health is now', format(hero_health, '.2f'))
                 print('The boss\'s health is now', format(boss_health, '.2f'))
                 input('Press enter to continue.')
@@ -556,35 +604,40 @@ def battle(enemy, hero, hero_health):
                     else:
                         boss_move = '5'
                 # boss moves
+                # Bow and Arrow
                 if boss_move == '1':
                     print('Boss used Bow and Arrow.')
                     received = normal_defense * 1.5
                     hero_health -= received
                     dealt = normal_offense
                     boss_health -= dealt
+                # Sword Swing
                 elif boss_move == '2':
                     print('Boss used Sword Swing.')
                     received = normal_defense
                     hero_health -= received
                     dealt = normal_offense
                     boss_health -= dealt
+                # Heal
                 elif boss_move == '3':
                     print('Boss used Heal.')
                     heal_health = 5
                     boss_health += heal_health
-                    if boss_health > 10:
-                        boss_health = 10
+                    if boss_health >= MAX_HEALTH:
+                        boss_health = MAX_HEALTH
                     dealt = normal_offense
                     boss_health -= dealt
+                # Parry
                 elif boss_move == '4':
                     print('Boss attempted to Parry.')
                     rand = random.randint(1, 10)
                     if boss['speed'] >= rand:
-                        print('Dodge successful.')
+                        print('Parry successful.')
                     elif boss['speed'] < rand:
                         dealt = normal_defense * 2
                         boss_health -= dealt
-                        print('Dodge failed. Your normal attack hit harder than usual.')
+                        print('Parry failed. Your normal attack hit harder than usual.')
+                # Parry and Heal
                 elif boss_move == '5':
                     print('boss attempted to Parry + Heal.')
                     rand = random.randint(1, 20)
@@ -593,12 +646,12 @@ def battle(enemy, hero, hero_health):
                         boss_health += heal_health
                         # If heal brings health above 10, reset to 10
                         if boss_health >= MAX_HEALTH:
-                            boss_health = 10
-                        print('Dodge + Heal successful.')
+                            boss_health = MAX_HEALTH
+                        print('Parry + Heal successful.')
                     elif boss['speed'] < rand:
                         dealt = normal_offense * 3
                         boss_health -= dealt
-                        print('Dodge + Heal failed. Your normal attack hit very hard.')
+                        print('Parry + Heal failed. Your normal attack hit very hard.')
                 print('Your health is now', format(hero_health, '.2f'))
                 print('The boss\'s health is now', format(boss_health, '.2f'))
                 input('Press enter to continue.')

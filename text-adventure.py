@@ -22,6 +22,8 @@ def startup():
             intro(1)
         elif selection == '2':
             print('Thank you for playing!')
+            123456789**987654321
+            game_started = True
         else:
             selection = input('Please enter a number. 1: New Game  2: Exit ')
 
@@ -111,7 +113,7 @@ def storyline(name, stats):
     print()
     health = combat.battle_tutorial(stats)
     if health == 'game_over':
-        print('Sorry, but you died. It\'s Game Over. :( We hope you\'ll play again!')
+        gameover()
     print('You have won your first battle. You will fight again tomorrow.')
     print('You will now be brought back to your cell.')
     input('Press enter to continue.')
@@ -123,6 +125,8 @@ def storyline(name, stats):
     print('But you must immediately fight a dwarf...')
     input('Press enter to continue.')
     health = combat.battle('dwarf', stats, health)
+    if health == 'game_over':
+        gameover()
     print('You defeated the dwarf, but the battle is far from over...')
     print('You must now find/fight your way out of the prison.')
     # Goes to prison hallway sequence
@@ -138,28 +142,48 @@ def storyline(name, stats):
             print('You chose correctly. You can see light near the end of both of the next hallways. From here there '
                   'are two hallways you can choose from: Hallway 7 or Hallway 8. One of these has an enemy while the '
                   'other allows you to escape the prison without facing an enemy.')
-            choice('7', '8')
+            hallway = choice('7', '8')
             if hallway == '7':
                 print('Congratulations on escaping the prison! But you still have one enemy left: the final boss!')
                 health = combat.battle('boss', stats, health)
+                if health == 'game_over':
+                    gameover()
+                else:
+                    print('Congratulations, you have reached the end of Prison Escape!')
+                    print('Thank you! We hope you\'ll play again!')
+                    input('Press enter to end the game.')
             if hallway == '8':
                 rand = encounter()
                 if rand <= 50:
                     print('You have encountered a dwarf.')
                     health = combat.battle('dwarf', stats, health)
+                    if health == 'game_over':
+                        gameover()
                 elif rand > 50:
                     print('You have encountered an elf.')
                     health = combat.battle('elf', stats, health)
+                    if health == 'game_over':
+                        gameover()
                 print('Congratulations on escaping the prison! But you still have one enemy left: the final boss!')
                 health = combat.battle('boss', stats, health)
+                if health == 'game_over':
+                    gameover()
+                else:
+                    print('Congratulations, you have reached the end of Prison Escape!')
+                    print('Thank you! We hope you\'ll play again!')
+                    input('Press enter to end the game.')
         if hallway == '4':
             rand = encounter()
             if rand <= 50:
                 print('You have encountered a dwarf.')
                 health = combat.battle('dwarf', stats, health)
+                if health == 'game_over':
+                    gameover()
             elif rand > 50:
                 print('You have encountered an elf.')
                 health = combat.battle('elf', stats, health)
+                if health == 'game_over':
+                    gameover()
             print('You can see light near the end of both of the next hallways. From here there are two hallways you '
                   'can choose from: Hallway 9 or Hallway 10. One of these has an enemy while the other provides safe '
                   'passage to the next part of the prison.')
@@ -167,25 +191,45 @@ def storyline(name, stats):
             if hallway == '9':
                 print('Congratulations on escaping the prison! But you still have one enemy left: the final boss!')
                 health = combat.battle('boss', stats, health)
+                if health == 'game_over':
+                    gameover()
+                else:
+                    print('Congratulations, you have reached the end of Prison Escape!')
+                    print('Thank you! We hope you\'ll play again!')
+                    input('Press enter to end the game.')
             if hallway == '10':
                 rand = encounter()
                 if rand <= 50:
                     print('You have encountered a dwarf.')
                     health = combat.battle('dwarf', stats, health)
+                    if health == 'game_over':
+                        gameover()
                 elif rand > 50:
                     print('You have encountered an elf.')
                     health = combat.battle('elf', stats, health)
+                    if health == 'game_over':
+                        gameover()
                 print('Congratulations on escaping the prison! But you still have one enemy left: the final boss!')
                 health = combat.battle('boss', stats, health)
+                if health == 'game_over':
+                    gameover()
+                else:
+                    print('Congratulations, you have reached the end of Prison Escape!')
+                    print('Thank you! We hope you\'ll play again!')
+                    input('Press enter to end the game.')
     # First hallway choice is 2.
     if hallway == '2':
         rand = encounter()
         if rand <= 50:
             print('You have encountered a dwarf.')
             health = combat.battle('dwarf', stats, health)
+            if health == 'game_over':
+                gameover()
         elif rand > 50:
             print('You have encountered an elf.')
             health = combat.battle('elf', stats, health)
+            if health == 'game_over':
+                gameover()
         print('From here there are two hallways you can choose from: Hallway 5 or Hallway 6. One of these has an enemy '
               'while the other provides safe passage to the next part of the prison.')
         hallway = choice('5', '6')
@@ -197,24 +241,44 @@ def storyline(name, stats):
             if hallway == '11':
                 print('Congratulations on escaping the prison! But you still have one enemy left: the final boss!')
                 health = combat.battle('boss', stats, health)
+                if health == 'game_over':
+                    gameover()
+                else:
+                    print('Congratulations, you have reached the end of Prison Escape!')
+                    print('Thank you! We hope you\'ll play again!')
+                    input('Press enter to end the game.')
             if hallway == '12':
                 rand = encounter()
                 if rand <= 50:
                     print('You have encountered a dwarf.')
                     health = combat.battle('dwarf', stats, health)
+                    if health == 'game_over':
+                        gameover()
                 elif rand > 50:
                     print('You have encountered an elf.')
                     health = combat.battle('elf', stats, health)
+                    if health == 'game_over':
+                        gameover()
                 print('Congratulations on escaping the prison! But you still have one enemy left: the final boss!')
                 health = combat.battle('boss', stats, health)
+                if health == 'game_over':
+                    gameover()
+                else:
+                    print('Congratulations, you have reached the end of Prison Escape!')
+                    print('Thank you! We hope you\'ll play again!')
+                    input('Press enter to end the game.')
         if hallway == '6':
             rand = encounter()
             if rand <= 50:
                 print('You have encountered a dwarf.')
                 health = combat.battle('dwarf', stats, health)
+                if health == 'game_over':
+                    gameover()
             elif rand > 50:
                 print('You have encountered an elf.')
                 health = combat.battle('elf', stats, health)
+                if health == 'game_over':
+                    gameover()
             print('You can see light near the end of both of the next hallways. From here there are two hallways you '
                   'can choose from: Hallway 13 or Hallway 14. One of these has an enemy while the other provides safe '
                   'passage to the next part of the prison.')
@@ -222,25 +286,46 @@ def storyline(name, stats):
             if hallway == '13':
                 print('Congratulations on escaping the prison! But you still have one enemy left: the final boss!')
                 health = combat.battle('boss', stats, health)
+                if health == 'game_over':
+                    gameover()
+                else:
+                    print('Congratulations, you have reached the end of Prison Escape!')
+                    print('Thank you! We hope you\'ll play again!')
+                    input('Press enter to end the game.')
             if hallway == '14':
                 rand = encounter()
                 if rand <= 50:
                     print('You have encountered a dwarf.')
                     health = combat.battle('dwarf', stats, health)
+                    if health == 'game_over':
+                        gameover()
                 elif rand > 50:
                     print('You have encountered an elf.')
                     health = combat.battle('elf', stats, health)
+                    if health == 'game_over':
+                        gameover()
                 print('Congratulations on escaping the prison! But you still have one enemy left: the final boss!')
                 combat.battle('boss', stats, health)
-                print('Congratulations, you have reached the end of Prison Escape!')
-                print('Thank you! We hope you\'ll play again!')
-                input('Press enter to end the game.')
+                if health == 'game_over':
+                    gameover()
+                else:
+                    print('Congratulations, you have reached the end of Prison Escape!')
+                    print('Thank you! We hope you\'ll play again!')
+                    input('Press enter to end the game.')
 
 
 # encounter generates a random number from 1 to 100 to determine which enemy (dwarf/elf) is encountered. (Taylor)
 def encounter():
     rand = random.randint(1, 100)
     return rand
+
+# gameover will end the game if the player's health is less than or equal to 0. (Taylor)
+def gameover():
+    print('Game over.')
+    print('You have died.')
+    print('Thanks for playing! We hope you play again!.')
+    restart = input('Press enter to restart the game.')
+    startup()
 
 
 # choice allows the player to choose which hallway they would like to go through, accepting the two options as
